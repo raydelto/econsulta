@@ -25,7 +25,7 @@
 ?>
 
 <fieldset>
-	<legend>Mantenimiento de Paciente</legend>
+	<legend align="center">Mantenimiento de Pacientes</legend>
 	<form action="mantenimientoPacientes.php" method="post">
 		<table class="unit-centered">
 			<tr>

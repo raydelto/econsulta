@@ -26,28 +26,28 @@
 
 
 <fieldset>
-	<legend>Mantenimiento de Cita</legend>
+	<legend align="center">Mantenimiento de Citas</legend>
 	<form action="mantenimientoCitas.php" method="post">
 		<table class="unit-centered">
 			<tr>
-				<td>ID</td>
-				<td><input type="text" name="id" value="<?php echo $Cita->id ?>"></td>
+				<!--<td>ID</td>-->
+				<td><input type="hidden" name="id" value="<?php echo $Cita->id ?>"></td>
 			</tr>
 			<tr>
-				<td>id_paciente</td>
+				<td>ID Paciente</td>
 				<td><input type="text" name="id_paciente" value="<?php echo $Cita->id_paciente ?>"></td>
 			</tr>
 			<tr>
-				<td>fecha</td>
+				<td>Fecha</td>
 				<td><input type="date" name="fecha" value="<?php echo $Cita->fecha ?>"></td>
 			</tr>
 			<tr>
-				<td>hora</td>
+				<td>Hora</td>
 				<td><input <input type="time" name="hora" value="<?php echo $Cita->hora ?>"></td>
 			</tr>
 
 			<tr>
-				<td>doctor</td>
+				<td>Doctor (a)</td>
 				<td><input type="text" name="doctor" value="<?php echo $Cita->doctor ?>"></td>
 			</tr>
 			
@@ -71,10 +71,10 @@
 						echo "<thead>
 									<tr>
 										<th>ID</th>
-										<th>id_paciente</th>
-										<th>fecha</th>
-										<th>hora</th>
-										<th>doctor</th>
+										<th>ID Paciente</th>
+										<th>Fecha</th>
+										<th>Hora</th>
+										<th>Doctor</th>
 										<th>Edición</th>
 									 </tr>
 							 </thead>";
