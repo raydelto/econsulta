@@ -1,0 +1,14 @@
+footer h3{
+	margin-top: 15px;
+	text-align: center;
+}
+header h1{
+	text-align: center;
+}
+nav li{
+	display: inline-block;
+	margin-right: 1%;
+}
+nav li a{
+	text-decoration: none;
+}
