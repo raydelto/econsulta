@@ -1,5 +1,6 @@
 <?php 
 include 'libreria/engine.php';
+
 $objPlantilla = new plantilla();
 class plantilla{
 
@@ -17,8 +18,10 @@ class plantilla{
     <link rel="stylesheet" href="css/estilo.css">
 	<link rel="stylesheet" href="css/kube.css">
 	<script type="text/javascript" src="js/validaciones.js"></script> 
+	<script type="text/javascript" src="js/funciones.js"></script> 
 	<script type="text/javascript" src="js/prefixfree.js"></script> 
 	<script type="text/javascript"  src="js/prefixfree.vars.js"></script> 
+	<script type="text/javascript"  src="js/kube.js"></script> 
 
 
 </head>
@@ -29,7 +32,7 @@ class plantilla{
 		    <ul>
 		        <li id="inicio"><a href="./">Inicio</a></li>
 			    <li id=""><a href="mantenimientoPacientes.php">Matenimiento de Pacientes</a></li>
-			    <li id=""><a href="mantenimientoCitas.php">Matenimiento de Citas</a></li>
+			    <li id=""><a href="Citas.php">Citas</a></li>
 			    <li id=""><a href="historialClinico.php">Historial Clínico</a></li>
 			    <li id=""><a href="historialPacientes.php">Historial de Pacientes</a></li>
 			    <li id=""><a href="reportes.php">Reportes</a></li>

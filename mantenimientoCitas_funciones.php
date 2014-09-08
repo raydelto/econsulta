@@ -1,3 +1,4 @@
+
 <?php
 	class Cita{
 	
@@ -6,7 +7,6 @@
 	private $id_paciente = "";
 	private $fecha = "";
 	private $hora = "";
-	private $doctor = "";
 
 
 	
@@ -39,8 +39,7 @@
 					  SET			
 						`id_paciente` = '{$this->id_paciente}',
 						`fecha` = '{$this->fecha}',
-						`hora` = '{$this->hora}',
-						`doctor` = '{$this->doctor}'
+						`hora` = '{$this->hora}'
 						 WHERE `id` =  '{$this->id}'";
 	
 				$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -48,7 +47,7 @@
 						//Validar que no hay cita con ese doctor a esa hora con alguien más
 					}else{
 						$this->id = mysqli_insert_id(conexion::obtenerInstancia());
-						header("Location:mantenimientoCitas.php");
+						header("Location:Citas.php");
 					}
 				
 			}else{
@@ -56,15 +55,13 @@
 									(
 									`id_paciente`,
 									`fecha`,
-									`hora`,
-									`doctor`
+									`hora`
 									)
 									VALUES
 									(
 									'{$this->id_paciente}',
 									'{$this->fecha}',
-									'{$this->hora}',
-									'{$this->doctor}'
+									'{$this->hora}'
 									)";
 					echo $sql;
 					$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -72,14 +69,14 @@
 						//Validar que no hay cita con ese doctor a esa hora con alguien más
 					}else{
 						$this->id = mysqli_insert_id(conexion::obtenerInstancia());
-						header("Location:mantenimientoCitas.php");
+						header("Location:Citas.php");
 					}
 			}
 		}
 	
 		function cargar(){
 		
-			$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`doctor` FROM cita WHERE id = '{$this->id}'";
+			$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora` FROM cita WHERE id = '{$this->id}'";
 			$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
 			if(mysqli_num_rows($rs) > 0){
 				$fila = mysqli_fetch_assoc($rs);
@@ -87,7 +84,6 @@
 				$this->id_paciente = $fila['id_paciente'];
 				$this->fecha = $fila['fecha'];
 				$this->hora = $fila['hora'];
-				$this->doctor = $fila['doctor'];
 		
 			}
 		}
@@ -95,16 +91,47 @@
 		function eliminar($id){
 			$sql = "DELETE FROM cita where id='$id'";
 			mysqli_query(conexion::obtenerInstancia(), $sql);
-		}
+		} 
 
 		static function listadoCita(){
-			$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`doctor` FROM cita";
+			$sql = "SELECT c.id, c.id_paciente,p.nombre,c.fecha,c.hora  
+					FROM paciente p 
+					JOIN cita c
+					ON c.id_paciente = p.id";
 			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 			return $rs;
 		}
-		
-		
-	
+
+		static function buscarPaciente($valor, $tipoBusqueda){
+
+				if($tipoBusqueda == "cedula"){
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+						FROM paciente
+						WHERE cedula LIKE '%{$valor}%'";
+					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+
+					return $rs;
+				}else if($tipoBusqueda == "nombre"){
+
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+						FROM paciente
+						WHERE nombre LIKE  '%{$valor}%'";
+					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+
+					return $rs;
+
+				}else if($tipoBusqueda == "apellido"){
+
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+						FROM paciente
+						WHERE apellido_paterno LIKE '%{$valor}%' OR apellido_materno LIKE '%{$valor}%'";
+					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+
+					return $rs;
+
+				}
+				
+			}
 	
 	}
 ?>

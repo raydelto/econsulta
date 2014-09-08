@@ -35,7 +35,7 @@
 
 			<tr>
 				<td>Cedula</td>
-				<td><input type="text" name="cedula" maxlength="13" maxlength="11" placeholder="Ejem: 01-00000000-0" required value="<?php echo $Paciente->cedula ?>"></td>
+				<td><input type="text" name="cedula" maxlength="14" maxlength="11" placeholder="001-0000000-1" required value="<?php echo $Paciente->cedula ?>"></td>
 			</tr>
 
 			<tr>
@@ -97,8 +97,7 @@
 										<th>ID</th>
 										<th>Cedula</th>
 										<th>Nombre</th>
-										<th>Apellido Pataterno</th>
-										<th>Apellido Mataterno</th>
+										<th>Apellido</th>
 										<th>Fecha de Nacimiento</th>
 										<th>Telefono</th>
 										<th>Sexo</th>
@@ -113,8 +112,7 @@
 							<td>{$fila['id']}</td>
 							<td>{$fila['cedula']}</td>
 							<td>{$fila['nombre']}</td>
-							<td>{$fila['apellido_paterno']}</td>
-							<td>{$fila['apellido_materno']}</td>
+							<td>{$fila['apellido_paterno']} {$fila['apellido_materno']}</td>
 							<td>{$fila['fecha_nacimiento']}</td>
 							<td>{$fila['telefono']}</td>
 							<td>{$fila['sexo']}</td>

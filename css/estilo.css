@@ -12,3 +12,32 @@ nav li{
 nav li a{
 	text-decoration: none;
 }
+
+.btnVolver{
+	-webkit-transform: translateX(-83px);
+}
+.center{
+
+	/*text-align: center;*/
+}
+.centrarGrupo{
+
+}
+
+.centrarTabla{
+	margin: 0 auto;
+}
+
+caption{
+	-webkit-transform: translateX(85px);
+}
+.tablaPacienteHover td{
+	cursor: pointer;
+}
+.btnBuscar{
+	width: 150px;
+	
+}
+.btnVolverAncho{
+	width: 155px;
+}
