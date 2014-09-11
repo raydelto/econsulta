@@ -1,7 +1,6 @@
 <?php
 	include 'plantilla.php';
-	include 'mantenimientoCitas_funciones.php';
-	include 'mantenimientoPaciente_funciones.php';
+	
 
 	$valor = "";
 	$tipoBusqueda = "";
@@ -26,30 +25,30 @@
 
 	<form action="buscarCitas.php" method="post" autocomplete="off">
 		<table class="centrarTabla">
-			<caption>Buscar por:</caption>
+			<caption class="text-centered">Buscar por:</caption>
 			<tr>
-				<td>Cedula:</td>
+				<td class="right">Cedula:</td>
 				<td><input type="text" name="cedula" placeholder="001-0000000-1" value="<?php  if(isset($_POST['cedula'])) echo $_POST['cedula'];?>" placeholder=""></td>
 			</tr>
 
 			<tr>
-				<td>Nombre:</td>
+				<td class="right">Nombre:</td>
 				<td><input type="text" name="nombre" placeholder="Pedro" value="<?php  if(isset($_POST['nombre'])) echo $_POST['nombre'];?>" placeholder=""></td>
 			</tr>
 
 			<tr>
-				<td>Apellido:</td>
+				<td class="right">Apellido:</td>
 				<td><input type="text" name="apellido" value="<?php  if(isset($_POST['apellido'])) echo $_POST['apellido'];?>" placeholder="Pérez" placeholder=""></td>
 			</tr>
 
 			<tr>
-				<td><input type="submit" class="btn btn-green btnBuscar" value="Buscar" placeholder=""></td>
-				<td><a href="mantenimientoPacientes.php" class="btn btn-black">Registrar Paciente</a></td>
+				<td><input type="submit" class="btn right width-35" value="Buscar" placeholder=""></td>
+				<td><a href="mantenimientoPacientes.php" class="btn btn-black width-35">Registrar Paciente</a></td>
 				
 			</tr>
 			<tr>
-				<td><a href="buscarCitas.php" class="btn">Nueva Busqueda</a></td>
-				<td><a href="Citas.php" class="btn btnVolverAncho">Volver</a></td>
+				<td><a href="buscarCitas.php" class="btn right width-35">Nueva Busqueda</a></td>
+				<td><a href="Citas.php" class="btn btnVolverAncho width-35">Volver</a></td>
 			</tr>
 		</table>
 	</form>
@@ -74,10 +73,12 @@
 										<th>Cedula</th>
 										<th>Nombre</th>
 										<th>Apellido</th>
+										<th>Est. Civíl</th>
 										<th>Fecha de Nacimiento</th>
 										<th>Telefono</th>
 										<th>Sexo</th>
 										<th>Dirección</th>
+										<th>Observación</th>
 									 </tr>
 							 </thead>";
 					while ($fila = mysqli_fetch_assoc($Paciente)) {
@@ -87,10 +88,12 @@
 							<td>{$fila['cedula']}</td>
 							<td>{$fila['nombre']}</td>
 							<td>{$fila['apellido_paterno']} {$fila['apellido_materno']}</td>
+							<td>{$fila['estado_civil']}</td>
 							<td>{$fila['fecha_nacimiento']}</td>
 							<td>{$fila['telefono']}</td>
 							<td>{$fila['sexo']}</td>
 							<td>{$fila['direccion']}</td>
+							<td class="width-25">{$fila['observacion']}</td>
 							
 							
 						</tr>	
@@ -121,10 +124,12 @@ LISTA;
 										<th>Cedula</th>
 										<th>Nombre</th>
 										<th>Apellidos</th>
+										<th>Est. Civil</th>
 										<th>Fecha de Nacimiento</th>
 										<th>Telefono</th>
 										<th>Sexo</th>
 										<th>Dirección</th>
+										<th>Observación</th>
 										
 									 </tr>
 							 </thead>";
@@ -137,9 +142,11 @@ LISTA;
 							<td>{$fila['nombre']}</td>
 							<td>{$fila['apellidos']}</td>
 							<td>{$fila['fecha_nacimiento']}</td>
+							<td>{$fila['estado_civil']}</td>
 							<td>{$fila['telefono']}</td>
 							<td>{$fila['sexo']}</td>
 							<td>{$fila['direccion']}</td>
+							<td class="width-25">{$fila['observacion']}</td>
 							
 CODIGO;
 						}

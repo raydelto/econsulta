@@ -6,10 +6,12 @@
 		private $nombre = "";
 		private $apellido_paterno = "";
 		private $apellido_materno = "";
+		private $estado_civil = "";
 		private $fecha_nacimiento = 0;
 		private $telefono = "";
 		private $sexo = "";
 		private $direccion = "";
+		private $observacion = "";
 
 		function __get($atributo){
 			if(isset($this->$atributo)){
@@ -35,7 +37,7 @@
 		
 		function cargar(){
 		
-			$sql = "SELECT `id`,`cedula`,`nombre`, `apellido_paterno`,`apellido_materno`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+			$sql = "SELECT `id`,`cedula`,`nombre`, `apellido_paterno`,`apellido_materno`,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion` 
 					FROM paciente 
 					WHERE id = '{$this->id}'";
 			$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -46,6 +48,7 @@
 				$this->nombre = $fila['nombre'];
 				$this->apellido_paterno = $fila['apellido_paterno'];
 				$this->apellido_materno = $fila['apellido_materno'];
+				$this->estado_civil = $fila['estado_civil'];
 				$this->fecha_nacimiento = $fila['fecha_nacimiento'];
 				$this->telefono = $fila['telefono'];
 				$this->sexo = $fila['sexo'];
@@ -68,10 +71,12 @@
 							`nombre` = '{$this->nombre}',
 							`apellido_paterno` = '{$this->apellido_paterno}',
 							`apellido_materno` = '{$this->apellido_materno}',
+							`estado_civil` = '{$this->estado_civil}',
 							`fecha_nacimiento` = '{$this->fecha_nacimiento}',
 							`telefono` = '{$this->telefono}',
 							`sexo` = '{$this->sexo}',
-							`direccion` = '{$this->direccion}'
+							`direccion` = '{$this->direccion}',
+							`observacion` = '{$this->observacion}'
 							 WHERE `id` =  '{$this->id}'";
 		
 					$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -88,10 +93,12 @@
 										`nombre`,
 										`apellido_paterno`,
 										`apellido_materno`,
+										`estado_civil`,
 										`fecha_nacimiento`,
 										`telefono`,
 										`sexo`,
-										`direccion`
+										`direccion`,
+										`observacion`
 										)
 										VALUES
 										(
@@ -99,10 +106,12 @@
 										'{$this->nombre}',
 										'{$this->apellido_paterno}',
 										'{$this->apellido_materno}',
+										'{$this->estado_civil}',
 										'{$this->fecha_nacimiento}',
 										'{$this->telefono}',
 										'{$this->sexo}',
-										'{$this->direccion}'
+										'{$this->direccion}',
+										'{$this->observacion}'
 										)";
 					echo $sql;
 					$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -118,7 +127,7 @@
 			}
 
 			static function listadoPaciente(){
-				$sql = "SELECT `id`, `cedula`,`nombre`, `apellido_paterno`,`apellido_materno`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+				$sql = "SELECT `id`, `cedula`,`nombre`, `apellido_paterno`,`apellido_materno`,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion` 
 						FROM paciente";
 				$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 				return $rs;

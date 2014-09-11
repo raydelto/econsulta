@@ -1,7 +1,7 @@
 <?php
 	include 'plantilla.php';
 
-	include 'mantenimientoCitas_funciones.php';
+	
 	$Cita = new Cita();
 	$readonly = "";
 	$titulo = "Mantenimiento de Citas";
@@ -42,8 +42,7 @@
 				<!--<td>ID</td>-->
 				<td><input type="hidden" name="id"  required value="<?php echo $Cita->id ?>"></td>
 			</tr>
-
-
+			
 			<tr>
 				<td>ID Paciente</td>
 				<td><input type="text" name="id_paciente" <?php echo $readonly; ?> required value="<?php echo $Cita->id_paciente ?>"></td>
@@ -58,7 +57,7 @@
 			</tr>
 			
 			<tr>
-				<td><input class=" btn btn-blue"type="submit" required value="Enviar"></td>
+				<td><input class=" btn "type="submit" required value="Enviar"></td>
 				<td><a class="btn btn-green" href="mantenimientoCitas.php">Nuevo</a></td>
 				<td><a class="btn btnVolver" href="<?=$btnVolver?>">Volver</a></td>
 			</tr>

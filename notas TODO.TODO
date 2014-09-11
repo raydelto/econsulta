@@ -1,0 +1,61 @@
+"¿Fuma?, tiny int , valores 0 ó 1
+¿Toma alcohol?  tiny int , valores 0 ó 1
+Síntomas llave foránea a una tabla síntoma.   Debemos de tener un mantenimiento de síntomas, y que fácilmente se pueda crear un nuevo síntoma desde la pantalla de registro de datos de la consulta.
+pruebas indicadas . Llave foránea a la tabla Pruebas de laboratorio.  Tendremos un mantenimiento de pruebas de laboratorio, y desde la pantalla de llenar datos de la consulta se debe poder agregar fácilmente una nueva prueba, si no está.
+ diagnóstico: Una relación una a muchos con la tabla diagnóstico.  Alguien puede ser diagnosticado de Hipertensión y diabetes, por ejemplo.  Hacer mantenimiento de diagnósticos
+
+ receta: Una relación una   a muchos con la tabla medicamentos.  Hacer mantenimiento de medicamentos.
+
+ (Boton receta: pop up con un listado con un buscador de las recetas)
+
+ tratamiento: Una relación una   a muchos con la tabla tratamiento.  Hacer mantenimiento de tratamientos.
+
+
+ Gestión de Visitas
+
+ TABLA SINTOMAS / MANTENIMIENTO
+
+ SINTOMAS (POP UP CON SINGOMAS PARA PODER SELECCIONARLO SI NO TA PODER AGREGARLO AHI MISMO SI NO EXISTEN (NUEVO SINTOMA))
+
+ PRUEBAS DE LABORATORIOS 
+
+
+
+
+
+
+ ☐ Mantenimiento Sintomas
+ ☐ Mantenimiento pruebas de laboratorio
+ ☐ Mantenimiento de Diagnostico
+ ☐ Mantenimiento de Medicamentos //Listo
+ ☐ Mantenimiento de Tratamiento
+
+   boton para los sintomas igual 
+   *Sintomas
+   id
+   sintoma
+
+    *Pruebas de laboratorio
+    id
+    prueba
+    id_tipo_prueba
+
+
+    diagnosticos boton plantalla flotante
+   *Diagnostico
+   id
+   diagnostico
+
+
+   *Tratamiento
+   id
+   tratamiento
+
+   *tipos de prueba
+   id
+   prueba
+
+
+
+
+

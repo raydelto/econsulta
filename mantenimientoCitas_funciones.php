@@ -94,18 +94,35 @@
 		} 
 
 		static function listadoCita(){
+			$fecha = date("Y-m-d");
+			
 			$sql = "SELECT c.id, c.id_paciente,p.nombre,c.fecha,c.hora  
 					FROM paciente p 
 					JOIN cita c
-					ON c.id_paciente = p.id";
+					ON c.id_paciente = p.id
+					WHERE fecha >= '{$fecha}'
+					ORDER BY fecha";
 			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+			return $rs;
+		}
+
+		static function cantidadCitasHoy(){
+			$fecha = date("Y-m-d");
+			//echo $fecha;
+			$sql = "SELECT COUNT(c.id) as cantidad
+					FROM paciente p 
+					JOIN cita c
+					ON c.id_paciente = p.id
+					WHERE fecha >= '{$fecha}'";
+			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+
 			return $rs;
 		}
 
 		static function buscarPaciente($valor, $tipoBusqueda){
 
 				if($tipoBusqueda == "cedula"){
-					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion`
 						FROM paciente
 						WHERE cedula LIKE '%{$valor}%'";
 					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
@@ -113,7 +130,7 @@
 					return $rs;
 				}else if($tipoBusqueda == "nombre"){
 
-					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion`
 						FROM paciente
 						WHERE nombre LIKE  '%{$valor}%'";
 					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
@@ -122,7 +139,7 @@
 
 				}else if($tipoBusqueda == "apellido"){
 
-					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`fecha_nacimiento`,`telefono`,`sexo`,`direccion` 
+					$sql = "SELECT `id`, `cedula`,`nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion`
 						FROM paciente
 						WHERE apellido_paterno LIKE '%{$valor}%' OR apellido_materno LIKE '%{$valor}%'";
 					$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
