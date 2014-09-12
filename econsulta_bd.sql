@@ -32,7 +32,7 @@ CREATE TABLE `cita` (
   PRIMARY KEY (`id`),
   KEY `CITA (id_paciente) - > PACIENTE (id)_idx` (`id_paciente`),
   CONSTRAINT `CITA (id_paciente) - > PACIENTE (id)` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (7,5,'2014-09-24','15:03:00'),(16,5,'2014-10-01','01:44:00'),(17,28,'2014-09-23','01:00:00'),(18,5,'2014-09-09','10:01:00'),(20,34,'2014-09-10','00:00:00'),(21,28,'2014-09-10','01:00:00'),(22,35,'2014-09-11','01:00:00');
+INSERT INTO `cita` VALUES (7,5,'2014-09-24','15:03:00'),(16,5,'2014-10-01','01:44:00'),(17,28,'2014-09-23','01:00:00'),(18,5,'2014-09-09','10:01:00'),(20,34,'2014-09-10','00:00:00'),(21,28,'2014-09-10','01:00:00'),(22,35,'2014-09-11','01:00:00'),(23,36,'2014-09-12','01:03:00');
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,9 +61,10 @@ CREATE TABLE `consulta` (
   `diagnostico` text COLLATE utf8_spanish_ci NOT NULL,
   `tratamiento` text COLLATE utf8_spanish_ci,
   `medicamento` text COLLATE utf8_spanish_ci,
+  `observaciones` text COLLATE utf8_spanish_ci,
   PRIMARY KEY (`id`),
   KEY `id_paciente -> id_idx` (`id_paciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +73,7 @@ CREATE TABLE `consulta` (
 
 LOCK TABLES `consulta` WRITE;
 /*!40000 ALTER TABLE `consulta` DISABLE KEYS */;
-INSERT INTO `consulta` VALUES (5,39,'2014-09-19','11:34:35','asd','afasdfas','asdf','asdfasdf'),(7,39,'2014-09-11','11:37:54','El paciente presenta dificultades para respirar al igual que una pequeÃ±a congestion nasal al llegar la tanda vespertina de los fines de semana','Fiebre amarilla','asd ','acetaminofen');
+INSERT INTO `consulta` VALUES (5,39,'2014-09-19','11:34:35','asd','afasdfas','asdf','asdfasdf',NULL),(7,39,'2014-09-11','11:37:54','El paciente presenta dificultades para respirar al igual que una pequeÃ±a congestion nasal al llegar la tanda vespertina de los fines de semana','Fiebre amarilla','asd ','acetaminofen',NULL),(8,39,'2014-09-11','19:27:04','Esta es la cita mÃ©dicaa','diagnostico','tratamiento','medicamento','Este paciente estÃ¡ super enfermo x.x xD'),(9,39,'2014-09-11','13:32:23','Tu sabe','asd','as','ads','asd');
 /*!40000 ALTER TABLE `consulta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,63 +123,6 @@ CREATE TABLE `diagnostico_detalle` (
 LOCK TABLES `diagnostico_detalle` WRITE;
 /*!40000 ALTER TABLE `diagnostico_detalle` DISABLE KEYS */;
 /*!40000 ALTER TABLE `diagnostico_detalle` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `hisitorial_clinico`
---
-
-DROP TABLE IF EXISTS `hisitorial_clinico`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `hisitorial_clinico` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_paciente` int(11) NOT NULL,
-  `historial` varchar(85) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_paciente -> id_idx` (`id_paciente`),
-  CONSTRAINT `id_paciente -> id` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hisitorial_clinico`
---
-
-LOCK TABLES `hisitorial_clinico` WRITE;
-/*!40000 ALTER TABLE `hisitorial_clinico` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hisitorial_clinico` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `historial_paciente`
---
-
-DROP TABLE IF EXISTS `historial_paciente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `historial_paciente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido_paterno` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido_materno` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `edad` int(11) NOT NULL,
-  `sexo` varchar(11) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha` date NOT NULL,
-  `hora` varchar(52) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `historial_paciente`
---
-
-LOCK TABLES `historial_paciente` WRITE;
-/*!40000 ALTER TABLE `historial_paciente` DISABLE KEYS */;
-INSERT INTO `historial_paciente` VALUES (1,'Danna','asd','asd',0,'sdfsdf','fdfgd','0000-00-00','0000-00-00 00:00:00');
-/*!40000 ALTER TABLE `historial_paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -258,7 +202,7 @@ CREATE TABLE `prueba_laboratorio` (
   PRIMARY KEY (`id`),
   KEY `pruebaLaboratorio->tipoPrueba_idx` (`id_tipo_prueba`),
   CONSTRAINT `pruebaLaboratorio->tipoPrueba` FOREIGN KEY (`id_tipo_prueba`) REFERENCES `tipo_prueba` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,8 +211,62 @@ CREATE TABLE `prueba_laboratorio` (
 
 LOCK TABLES `prueba_laboratorio` WRITE;
 /*!40000 ALTER TABLE `prueba_laboratorio` DISABLE KEYS */;
-INSERT INTO `prueba_laboratorio` VALUES (8,'Tal cosa cosa',9);
+INSERT INTO `prueba_laboratorio` VALUES (19,'Cosaaa',12),(23,'tal',13),(24,'Coolllll',14);
 /*!40000 ALTER TABLE `prueba_laboratorio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pruebas_indicadas`
+--
+
+DROP TABLE IF EXISTS `pruebas_indicadas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pruebas_indicadas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_prueba` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pruebas_indicadas`
+--
+
+LOCK TABLES `pruebas_indicadas` WRITE;
+/*!40000 ALTER TABLE `pruebas_indicadas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pruebas_indicadas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resultados_pruebas_indicadas`
+--
+
+DROP TABLE IF EXISTS `resultados_pruebas_indicadas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resultados_pruebas_indicadas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_prueba` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `resultados` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resultados_pruebas_indicadas`
+--
+
+LOCK TABLES `resultados_pruebas_indicadas` WRITE;
+/*!40000 ALTER TABLE `resultados_pruebas_indicadas` DISABLE KEYS */;
+INSERT INTO `resultados_pruebas_indicadas` VALUES (1,2,2,'asd','2014-08-15','12:12:12'),(2,12,30,'asdasd','2014-08-16','12:15:50'),(4,11,34,'asdasd','2014-09-12','01:00:00');
+/*!40000 ALTER TABLE `resultados_pruebas_indicadas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -331,7 +329,7 @@ CREATE TABLE `tipo_prueba` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_prueba` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +338,7 @@ CREATE TABLE `tipo_prueba` (
 
 LOCK TABLES `tipo_prueba` WRITE;
 /*!40000 ALTER TABLE `tipo_prueba` DISABLE KEYS */;
-INSERT INTO `tipo_prueba` VALUES (9,'Sonografia'),(10,'Radiografia');
+INSERT INTO `tipo_prueba` VALUES (11,'Radiografia'),(12,'Sonografia'),(13,'Hidrografia'),(14,'Prueba rara'),(15,'Prueba nueva'),(16,'Estropacea');
 /*!40000 ALTER TABLE `tipo_prueba` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-11  5:49:46
+-- Dump completed on 2014-09-12 17:57:39

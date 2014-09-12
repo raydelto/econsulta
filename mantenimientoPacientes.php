@@ -108,7 +108,7 @@
 
 			<tr>
 				<td><input class="btn right" type="submit" value="Enviar"></td>
-				<td><a class="btn btn-green" href="mantenimientoPacientes.php">Nuevo</td>
+				<td><a class="btn btn-green" href="mantenimientoPacientes.php">Nuevo</a></td>
 			</tr>
 
 		</table>

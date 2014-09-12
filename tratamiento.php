@@ -36,7 +36,7 @@
 			
 			<tr>
 				<td class="right"><input class=" btn "type="submit" value="Enviar"></td>
-				<td><a class="btn btn-green" href="tratamiento.php">Nuevo</td>
+				<td><a class="btn btn-green" href="tratamiento.php">Nuevo</a></td>
 			</tr>
 
 		</table>

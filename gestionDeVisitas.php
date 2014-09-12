@@ -13,6 +13,7 @@ if($_POST){
 	$gestionVisita->diagnostico = $_POST['diagnostico'];
 	$gestionVisita->tratamiento = $_POST['tratamiento'];
 	$gestionVisita->medicamento = $_POST['medicamento'];
+	$gestionVisita->observaciones = $_POST['observaciones'];
 
 	header("Location:gestionDeVisitas.php");
 	$gestionVisita->guardar();
@@ -43,6 +44,8 @@ if($_POST){
 			$horaActual = $gestionVisita->hora;
 		}
 
+	/*	$val = $_GET['diagnostico_check'];*/
+		
 
 ?>
 
@@ -52,34 +55,96 @@ if($_POST){
 	<legend align="center">Mantenimiento de gestionVisita</legend>
 	<form action="gestionDeVisitas.php" method="post" autocomplete="off">
 		<table class="unit-centered">
+
+				<tr>
+					
+						
+
+				<!-- 	<?php
+					
+							foreach ($val as $value) {
+							echo "<ul class=\"forms-list\">
+							        <li>
+							        <input type=\"checkbox\" checked onclick=\"return false\" value='{$value}'/>{$value} 
+							        </li>
+							    </ul>";
+							
+
+						}
+					?> -->
+
+				</tr>
+
 			<tr>
 				<!--<td>ID</td>-->
 				<input type="hidden" name="id" required value="<?php echo $gestionVisita->id ?>">
 			</tr>
 			<tr>
 				<td class="right">id_paciente</td>
-				<td><input type="text" name="id_paciente" required value="<?php echo $gestionVisita->id_paciente ?>"></td>
+				
+
+				<td>
+					<select name="id_paciente" required>
+						<option value = "">Paciente</option>
+						<?php
+							$paciente = Paciente::listadoPaciente();
+							
+							$selected = "";
+
+
+							if(mysqli_num_rows($paciente) > 0){
+								while($fila = mysqli_fetch_assoc($paciente)){
+									if($gestionVisita->id_paciente == $fila['id']){
+										$selected = "selected";
+									}else{
+										$selected = "";
+									}
+									echo "<option {$selected} value='{$fila['id']}'>{$fila['nombre']} {$fila['apellido_paterno']} {$fila['apellido_materno']}</option>";
+								}
+							}
+
+							
+						?>
+					</select>
+				</td>
+
+
+
+
 			</tr>
+
+
+
+
+
+
+
+
 			<tr>
 				<td class="right">fecha</td>
 
-				<td><input type="text" name="fecha" required value="<?= $fechaActual; ?>"></td>
+				<td><input type="date" name="fecha" required value="<?= $fechaActual; ?>"></td>
 
 
 			</tr>
 			<tr>
 				<td class="right">hora</td>
-				<td><input type="text" name="hora" required value="<?= $horaActual; ?>"></td>
+				<td><input type="time" name="hora" required value="<?= $horaActual; ?>"></td>
+	
 			</tr>
 
 			<tr>
 				<td class="right">Nota Médica</td>
-				<td><textarea required name="nota_medica" rows="4" class="width-50"><?php echo $gestionVisita->nota_medica ?></textarea></td>
+					<td><textarea required name="nota_medica" rows="4" class="width-50"><?php echo $gestionVisita->nota_medica ?></textarea></td>
 			</tr>
 
 			<tr>
 				<td class="right">diagnostico</td>
 				<td><input type="text" name="diagnostico" required value="<?php echo $gestionVisita->diagnostico ?>"></td>
+				<td> <button class="btn " id="show-modal"
+					    data-tools="modal" data-width="700" data-title="Selección de Diagnostico" data-content="modal_diagnostico.php">
+					    Seleccionar Diagnostico
+					</button></td>
 			</tr>
 
 			<tr>
@@ -92,10 +157,16 @@ if($_POST){
 				<td><input type="text" name="medicamento" required value="<?php echo $gestionVisita->medicamento ?>"></td>
 			</tr>
 
+			<tr>
+				<td class="right">Observaciones</td>
+				<td><textarea required name="observaciones" rows="4" class="width-50"><?php echo $gestionVisita->observaciones ?></textarea></td>
+			</tr>
+
 			
 			<tr>
 				<td class="right"><input class=" btn "type="submit" value="Enviar"></td>
-				<td><a class="btn btn-green" href="gestionDeVisitas.php">Nuevo</td>
+				<td><a class="btn btn-green" href="gestionDeVisitas.php">Nuevo</a></td>
+			
 			</tr>
 
 		</table>
@@ -103,14 +174,18 @@ if($_POST){
 
 </fieldset>
 
+
+
+
+
 	<table class="table-bordered unit-centered table-hovered">
 			
 				<?php 
-					 $gestionVisita = gestionVisita::listadoGestionVisita();
+					 		$gestionVisita = gestionVisita::listadoGestionVisita();
 					if(mysqli_num_rows($gestionVisita) < 1){
 						echo "<center><h4>Aún no se han agregado gestionVisita<h4></center>";
 					}else{
-						echo "<thead>
+						echo 	"<thead>
 									<tr>
 										<th>ID</th>
 										<th>ID Paciente</th>
@@ -120,6 +195,8 @@ if($_POST){
 										<th>Diagnostico</th>
 										<th>Tratamiento</th>
 										<th>Medicamento</th>
+									
+										<th>Observaciones</th>
 										<th>Edición</th>
 									 </tr>
 							 </thead>";
@@ -135,6 +212,7 @@ if($_POST){
 							<td>{$fila['diagnostico']}</td>
 							<td>{$fila['tratamiento']}</td>
 							<td>{$fila['medicamento']}</td>
+							<td>{$fila['observaciones']}</td>
 							
 							<td><a href='gestionDeVisitas.php?edit={$fila['id']}'>Editar</a> | 
 								<a onclick="return confirm('¿Seguro que desea eliminar este gestionVisita?');" href='gestionDeVisitas.php?del={$fila['id']}'>Eliminar</a></td>

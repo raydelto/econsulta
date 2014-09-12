@@ -47,10 +47,10 @@
 			if($this->id > 0){
 				$sql="UPDATE `prueba_laboratorio`
 					  SET			
-						`prueba` = '{$this->prueba}',
-						`id_tipo_prueba` = '{$this->id_tipo_prueba}'
+						`prueba` = '{$this->prueba}'
+						
 						 WHERE `id` =  '{$this->id}'";
-	
+				echo $sql;
 				mysqli_query(conexion::obtenerInstancia(), $sql);
 				$this->id = mysqli_insert_id(conexion::obtenerInstancia());
 				
@@ -65,7 +65,7 @@
 									'{$this->prueba}',
 									'{$this->id_tipo_prueba}'
 									)";
-				
+				echo $sql;
 				mysqli_query(conexion::obtenerInstancia(), $sql);
 				$this->id = mysqli_insert_id(conexion::obtenerInstancia());
 			}
@@ -84,6 +84,21 @@
 	
 
 
+	static function listadoTipoPrueba(){
+		$sql = "SELECT p.id as id, t.id as id_tipo_prueba,t.tipo_prueba, p.prueba 
+				FROM tipo_prueba t
+				JOIN prueba_laboratorio p
+				ON t.id = p.id_tipo_prueba";
+
+		$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+		return $rs;
+	}
+
+	static function listadoTipoPrueba2(){
+		$sql = "SELECT `id`,`tipo_prueba` FROM tipo_prueba";
+		$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+		return $rs;
+	}
 
 
 	}

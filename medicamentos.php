@@ -61,7 +61,7 @@
 			
 			<tr>
 				<td class="right"><input class=" btn "type="submit" required value="Enviar"></td>
-				<td><a class="btn btn-green" href="Medicamentos.php">Nuevo</td>
+				<td><a class="btn btn-green" href="Medicamentos.php">Nuevo</a></td>
 			</tr>
 
 		</table>

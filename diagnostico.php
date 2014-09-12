@@ -41,7 +41,7 @@ if($_POST){
 			
 			<tr>
 				<td class="right"><input class=" btn "type="submit" value="Enviar"></td>
-				<td><a class="btn btn-green" href="diagnostico.php">Nuevo</td>
+				<td><a class="btn btn-green" href="diagnostico.php">Nuevo</a></td>
 			</tr>
 
 		</table>

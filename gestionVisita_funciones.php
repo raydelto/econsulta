@@ -10,6 +10,7 @@
 	private $diagnostico = "";
 	private $tratamiento = "";
 	private $medicamento = "";
+	private $observaciones = "";
 	
 	function __get($atributo){
 		if(isset($this->$atributo)){
@@ -36,7 +37,7 @@
 
 	function cargar(){
 	
-		$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`nota_medica`,`diagnostico`,`tratamiento`,`medicamento` 
+		$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`nota_medica`,`diagnostico`,`tratamiento`,`medicamento`,`observaciones`
 		FROM consulta WHERE id = '{$this->id}'";
 		$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
 		if(mysqli_num_rows($rs) > 0){
@@ -49,6 +50,7 @@
 			$this->diagnostico = $fila['diagnostico'];
 			$this->tratamiento = $fila['tratamiento'];
 			$this->medicamento = $fila['medicamento'];
+			$this->observaciones = $fila['observaciones'];
 	
 		}
 	}
@@ -64,7 +66,8 @@
 						`nota_medica` = '{$this->nota_medica}',
 						`diagnostico` = '{$this->diagnostico}',
 						`tratamiento` = '{$this->tratamiento}',
-						`medicamento` = '{$this->medicamento}'
+						`medicamento` = '{$this->medicamento}',
+						`observaciones` = '{$this->observaciones}'
 						 WHERE `id` =  '{$this->id}'";
 	
 				mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -79,7 +82,8 @@
 									`nota_medica`,
 									`diagnostico`,
 									`tratamiento`,
-									`medicamento`
+									`medicamento`,
+									`observaciones`
 									)
 									VALUES
 									(
@@ -89,7 +93,8 @@
 									'{$this->nota_medica}',
 									'{$this->diagnostico}',
 									'{$this->tratamiento}',
-									'{$this->medicamento}'
+									'{$this->medicamento}',
+									'{$this->observaciones}'
 									)";
 	
 				mysqli_query(conexion::obtenerInstancia(), $sql);
@@ -103,7 +108,7 @@
 		}
 
 		static function listadoGestionVisita(){
-			$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`nota_medica`,`diagnostico`,`tratamiento`,`medicamento` 
+			$sql = "SELECT `id`,`id_paciente`,`fecha`,`hora`,`nota_medica`,`diagnostico`,`tratamiento`,`medicamento`,`observaciones`
 					FROM consulta";
 			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 			return $rs;
