@@ -44,10 +44,7 @@ if($_POST){
 		}
 
 		$ultimo_id = gestionDeVisitas::ultimoId("SELECT LAST_INSERT_ID() as ultimo_id");
-		if(isset($_GET['fallo'])){
-			$ultimo_id = "";
-			echo "El ultimo ID ES: ".$ultimo_id;
-		}
+		
 		//var_dump($ultimo_id);
 		if($ultimo_id !=0){
 			header("Location:sintomas_detalle.php?id={$ultimo_id}");

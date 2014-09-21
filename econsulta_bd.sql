@@ -53,18 +53,18 @@ DROP TABLE IF EXISTS `consulta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `consulta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_consulta` int(11) NOT NULL AUTO_INCREMENT,
   `id_paciente` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `nota_medica` text COLLATE utf8_spanish_ci NOT NULL,
-  `diagnostico` text COLLATE utf8_spanish_ci NOT NULL,
-  `tratamiento` text COLLATE utf8_spanish_ci,
-  `medicamento` text COLLATE utf8_spanish_ci,
-  `observaciones` text COLLATE utf8_spanish_ci,
-  PRIMARY KEY (`id`),
+  `motivo_consulta` text COLLATE utf8_spanish_ci NOT NULL,
+  `fuma` tinyint(4) NOT NULL,
+  `alcohol` tinyint(4) DEFAULT NULL,
+  `cafe` tinyint(4) DEFAULT NULL,
+  `observacion` text COLLATE utf8_spanish_ci,
+  PRIMARY KEY (`id_consulta`),
   KEY `id_paciente -> id_idx` (`id_paciente`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `consulta` (
 
 LOCK TABLES `consulta` WRITE;
 /*!40000 ALTER TABLE `consulta` DISABLE KEYS */;
-INSERT INTO `consulta` VALUES (5,39,'2014-09-19','11:34:35','asd','afasdfas','asdf','asdfasdf',NULL),(7,39,'2014-09-11','11:37:54','El paciente presenta dificultades para respirar al igual que una pequeÃ±a congestion nasal al llegar la tanda vespertina de los fines de semana','Fiebre amarilla','asd ','acetaminofen',NULL),(8,39,'2014-09-11','19:27:04','Esta es la cita mÃ©dicaa','diagnostico','tratamiento','medicamento','Este paciente estÃ¡ super enfermo x.x xD'),(9,39,'2014-09-11','13:32:23','Tu sabe','asd','as','ads','asd');
+INSERT INTO `consulta` VALUES (5,39,'2014-09-19','11:34:35','asd',0,0,0,NULL),(7,39,'2014-09-11','11:37:54','El paciente presenta dificultades para respirar al igual que una pequeÃ±a congestion nasal al llegar la tanda vespertina de los fines de semana',0,0,0,NULL),(8,39,'2014-09-11','19:27:04','Esta es la cita mÃ©dicaa',0,0,0,'Este paciente estÃ¡ super enfermo x.x xD'),(9,39,'2014-09-11','13:32:23','Tu sabe',0,0,0,'asd'),(16,35,'2014-09-21','18:34:26','a',0,1,0,'a'),(17,30,'2014-09-21','18:39:20','Motivo',1,1,1,'Observacion'),(18,30,'2014-09-21','18:45:19','a',0,0,0,'a'),(19,28,'2014-09-21','18:49:26','Motivo de consulta',1,1,1,'Observacion');
 /*!40000 ALTER TABLE `consulta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,10 +110,10 @@ DROP TABLE IF EXISTS `diagnostico_detalle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `diagnostico_detalle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_paciente` int(11) NOT NULL,
   `id_diagnostico` int(11) NOT NULL,
+  `id_consulta` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +122,7 @@ CREATE TABLE `diagnostico_detalle` (
 
 LOCK TABLES `diagnostico_detalle` WRITE;
 /*!40000 ALTER TABLE `diagnostico_detalle` DISABLE KEYS */;
+INSERT INTO `diagnostico_detalle` VALUES (1,1,19),(2,3,19);
 /*!40000 ALTER TABLE `diagnostico_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +142,7 @@ CREATE TABLE `medicamento` (
   `presentacion` text COLLATE utf8_spanish_ci,
   `laboratorio` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,7 +151,7 @@ CREATE TABLE `medicamento` (
 
 LOCK TABLES `medicamento` WRITE;
 /*!40000 ALTER TABLE `medicamento` DISABLE KEYS */;
-INSERT INTO `medicamento` VALUES (3,'Suprofen','Gold Suprofen','Quita la tos','Aspirina','40 mil','Bayer'),(5,'asd','asd','Este medicamento se aplica cuando el paciente presenta deficiencias respiratorias','asd','asd','asd'),(8,'Albendazol (Oral)','Albendazol (Oral)','Its Work','Aspirina','10 mil','Bayer'),(9,'bbb','bbb','bb','bb','bb','bbb');
+INSERT INTO `medicamento` VALUES (3,'Suprofen','Gold Suprofen','Quita la tos','Aspirina','40 mil','Bayer'),(5,'asd','asd','Este medicamento se aplica cuando el paciente presenta deficiencias respiratorias','asd','asd','asd'),(8,'Albendazol (Oral)','Albendazol (Oral)','Its Work','Aspirina','10 mil','Bayer'),(9,'bbb','bbb','bb','bb','bb','bbb'),(10,'ACARBOSA','ACARBOSA','Quita el dolor de espalda','Acetaminofen','50 MG','ACARBOSA INK');
 /*!40000 ALTER TABLE `medicamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,7 +176,7 @@ CREATE TABLE `paciente` (
   `observacion` text COLLATE utf8_spanish_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cedula_UNIQUE` (`cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +185,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES (5,'012-0119008-7','Manuel','Gonzales','De Los Santos','','1993-11-12','809-557-4536','Masculino','Av. Isabel Aguiar',NULL),(28,'012-0119808-7','Danny','Feliz','De Los Santos','','1993-08-10','829-705-8510','Masculino','Av. Isabel Aguiar',NULL),(29,'011-55698948-','Samuel','Rodriguez','','','1987-02-17','809-996-4548','Masculino','Av. Romulo',NULL),(30,'014-99655584-','Candy','GarcÃ­a','','','1994-07-13','809-996-4598','Femenino','Lejos',NULL),(34,'0120026546','Danger','Orzco','piÃ±a','Casado','2014-09-10','809557','Masculino','Av. CircunvalaciÃ³n Este #45','Este paciente presenta problemas de respiracion cuando '),(35,'123123','aasd','asd','asf','Casado','2014-09-07','234','Masculino','sdf','asa'),(36,'014-0056236-8','Octavio','Martinez','Orozco','Soltero','1987-06-18','809-665-5524','Masculino','Av. Independencia #24','Trabaja en una planta de Plomo');
+INSERT INTO `paciente` VALUES (5,'012-0119008-7','Manuel','Gonzales','De Los Santos','','1993-11-12','809-557-4536','Masculino','Av. Isabel Aguiar',NULL),(28,'012-0119808-7','Danny','Feliz','De Los Santos','','1993-08-10','829-705-8510','Masculino','Av. Isabel Aguiar',NULL),(29,'011-55698948-','Samuel','Rodriguez','','','1987-02-17','809-996-4548','Masculino','Av. Romulo',NULL),(30,'014-99655584-','Candy','GarcÃ­a','','','1994-07-13','809-996-4598','Femenino','Lejos',NULL),(34,'0120026546','Danger','Orzco','piÃ±a','Casado','2014-09-10','809557','Masculino','Av. CircunvalaciÃ³n Este #45','Este paciente presenta problemas de respiracion cuando '),(35,'123123','aasd','asd','asf','Casado','2014-09-07','234','Masculino','sdf','asa'),(36,'014-0056236-8','Octavio','Martinez','Orozco','Soltero','1987-06-18','809-665-5524','Masculino','Av. Independencia #24','Trabaja en una planta de Plomo'),(37,'012-5519008-7','Sterlin','Feliz','De los Santos','Casado','2014-09-02','809-996-4521','Masculino','Av. Independencia','Electricista');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +240,31 @@ CREATE TABLE `pruebas_indicadas` (
 LOCK TABLES `pruebas_indicadas` WRITE;
 /*!40000 ALTER TABLE `pruebas_indicadas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pruebas_indicadas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recetas`
+--
+
+DROP TABLE IF EXISTS `recetas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recetas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_medicamento` int(11) NOT NULL,
+  `id_consulta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recetas`
+--
+
+LOCK TABLES `recetas` WRITE;
+/*!40000 ALTER TABLE `recetas` DISABLE KEYS */;
+INSERT INTO `recetas` VALUES (5,3,21),(6,3,31),(7,5,31),(8,8,31),(9,10,31),(10,9,42),(11,5,42),(12,5,42),(13,3,42),(14,3,56),(15,11,56),(16,8,57),(17,11,57),(18,3,58),(19,8,59),(20,11,59);
+/*!40000 ALTER TABLE `recetas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -303,10 +329,10 @@ DROP TABLE IF EXISTS `sintoma_detalle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sintoma_detalle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_paciente` int(11) NOT NULL,
   `id_sintoma` int(11) NOT NULL,
+  `id_consulta` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -315,6 +341,7 @@ CREATE TABLE `sintoma_detalle` (
 
 LOCK TABLES `sintoma_detalle` WRITE;
 /*!40000 ALTER TABLE `sintoma_detalle` DISABLE KEYS */;
+INSERT INTO `sintoma_detalle` VALUES (1,6,17),(2,6,19),(3,7,19);
 /*!40000 ALTER TABLE `sintoma_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,6 +367,31 @@ LOCK TABLES `tipo_prueba` WRITE;
 /*!40000 ALTER TABLE `tipo_prueba` DISABLE KEYS */;
 INSERT INTO `tipo_prueba` VALUES (11,'Radiografia'),(12,'Sonografia'),(13,'Hidrografia'),(14,'Prueba rara'),(15,'Prueba nueva'),(16,'Estropacea');
 /*!40000 ALTER TABLE `tipo_prueba` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipos_pruebas_detalles`
+--
+
+DROP TABLE IF EXISTS `tipos_pruebas_detalles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipos_pruebas_detalles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_tipo_prueba` int(11) DEFAULT NULL,
+  `id_consulta` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipos_pruebas_detalles`
+--
+
+LOCK TABLES `tipos_pruebas_detalles` WRITE;
+/*!40000 ALTER TABLE `tipos_pruebas_detalles` DISABLE KEYS */;
+INSERT INTO `tipos_pruebas_detalles` VALUES (25,12,42);
+/*!40000 ALTER TABLE `tipos_pruebas_detalles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -375,4 +427,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-12 17:57:39
+-- Dump completed on 2014-09-21 18:53:59

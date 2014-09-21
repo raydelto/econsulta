@@ -30,6 +30,7 @@
 					while ($fila = mysqli_fetch_assoc($reporte_consultas_funciones)) {
 						$sintomas = reporte_consultas_funciones::sintomas($fila['id']);
 						$diagnosticos = reporte_consultas_funciones::diagnosticos($fila['id']);
+						$medicamentos = reporte_consultas_funciones::medicamentos($fila['id']);
 						
 
 						echo <<<CODIGO
@@ -57,7 +58,16 @@ CODIGO;
 							}							
 						echo "
 							</td>
+							<td>";
 
+							foreach ($medicamentos as $medicamento) {
+								echo $medicamento['diagnostico'].", ";
+								
+							}
+
+
+						echo "
+						</td>
 						</tr>";
 						}
 					}
