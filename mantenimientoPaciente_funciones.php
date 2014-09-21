@@ -78,7 +78,11 @@
 							`direccion` = '{$this->direccion}',
 							`observacion` = '{$this->observacion}'
 							 WHERE `id` =  '{$this->id}'";
-		
+					echo "\n\n".$sql;
+					echo '<script type="text/javascript">
+						alert({$sql});
+
+					</script>';
 					$rs = mysqli_query(conexion::obtenerInstancia(), $sql);
 					if ($rs == false) {
 						echo "<h3 style='color: red' align='center'>Error, ésta Cédula está actualmente en uso.</h3>";
@@ -128,7 +132,8 @@
 
 			static function listadoPaciente(){
 				$sql = "SELECT `id`, `cedula`,`nombre`, `apellido_paterno`,`apellido_materno`,`estado_civil`,`fecha_nacimiento`,`telefono`,`sexo`,`direccion`,`observacion` 
-						FROM paciente";
+						FROM paciente
+						ORDER BY `nombre` ASC";
 				$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 				return $rs;
 			}

@@ -7,9 +7,10 @@
 	$titulo = "Mantenimiento de Citas";
 	$btnVolver = "Citas.php";
 
+	$id_paciente_get = $_GET['id_paciente'];
 	if($_POST){
 		$Cita->id = $_POST['id'];
-		$Cita->id_paciente = $_POST['id_paciente'];
+		$Cita->id_paciente = $id_paciente_get;
 		$Cita->fecha = $_POST['fecha'];
 		$Cita->hora = $_POST['hora'];
 		
@@ -35,7 +36,7 @@
 	<legend align="center"><?=$titulo?></legend>
 
 
-<form action="mantenimientoCitas.php" method="post">
+<form action="mantenimientoCitas.php?id_paciente=<?php echo $id_paciente_get ?>" method="post">
 		<table class="unit-centered">
 		<caption><?=$titulo?></caption>
 			<tr>
@@ -44,8 +45,17 @@
 			</tr>
 			
 			<tr>
-				<td>ID Paciente</td>
-				<td><input type="text" name="id_paciente" <?php echo $readonly; ?> required value="<?php echo $Cita->id_paciente ?>"></td>
+				<td>Paciente</td>
+				
+				<?php
+					$nomApell = Cita::buscarNombre($Cita->id_paciente);
+					if(mysqli_num_rows($nomApell) > 0){
+						while($fila = mysqli_fetch_assoc($nomApell)){
+							echo "<td><input type=\"text\" name=\"id_paciente\" {$readonly} required value=\"{$fila['nombre']} {$fila['apellidos']}\"></td>";
+						}
+					}
+
+				?>
 			</tr>
 			<tr>
 				<td>Fecha</td>

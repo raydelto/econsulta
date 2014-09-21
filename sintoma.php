@@ -1,12 +1,13 @@
 <?php
 	include 'plantilla.php';
+	include 'submenu.php';
 	$sintoma = new sintoma();
 	if($_POST){
 		$sintoma->id = $_POST['id'];
 		$sintoma->sintoma = $_POST['sintoma'];
 		$sintoma->descripcion = $_POST['descripcion'];
 		$sintoma->guardar();
-		//header("Location:sintoma.php");
+		header("Location:sintoma.php");
 	}else if(isset($_GET['edit'])){
 		$sintoma->id = $_GET['edit'];
 		$sintoma->cargar();

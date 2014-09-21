@@ -1,6 +1,7 @@
 <?php 
 
 	include 'plantilla.php';
+	include 'submenu.php';
 	
 	$Medicamentos = new Medicamentos();
 	if($_POST){

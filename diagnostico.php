@@ -1,6 +1,7 @@
 <?php
 
 include 'plantilla.php';
+include 'submenu.php';
 
 
 $diagnostico = new diagnostico();

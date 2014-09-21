@@ -1,5 +1,6 @@
 <?php
 	include 'plantilla.php';
+	include 'submenu.php';
 	
 	$resultados_analisis_indicados = new resultados_analisis_indicados();
 	if($_POST){

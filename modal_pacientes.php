@@ -1,8 +1,7 @@
 <?php
-	include 'plantilla.php';
-	include 'submenu.php';
+	include "libreria/engine.php";
 
-	
+	$eliminar ="";
 	$Paciente = new Paciente();
 	if($_POST){
 		$Paciente->id = $_POST['id'];
@@ -24,16 +23,30 @@
 	
 	}else if(isset($_GET['del'])){
 		$Paciente->eliminar($_GET['del']);
+		if($eliminar != ""){
+
+		}
 	}
 ?>
 
+<script type="text/javascript">
+    function doSomething() {
+
+      document.getElementById('show-modal').click();
+
+    }
+
+    /*$("#submitButton").trigger('click');*/
+</script>
+
+
 <fieldset>
 	<legend align="center">Mantenimiento de Pacientes</legend>
-	<form action="mantenimientoPacientes.php" method="post">
+	<form action="gestionDeVisitas.php?fallo=" method="post" >
 		<table class="unit-centered">
 			<tr>
-				<!--<td>ID</td>-->
-				<input type="hidden" name="id" value="<?php echo $Paciente->id ?>">
+				<td class="right">ID</td>
+				<td><input type="text" name="id" value="<?php echo $Paciente->id ?>"></td>
 			</tr>
 
 			<tr>
@@ -110,8 +123,9 @@
 			</tr>
 
 			<tr>
-				<td><input class="btn right" type="submit" value="Enviar"></td>
-				<td><a class="btn btn-green" href="mantenimientoPacientes.php">Nuevo</a></td>
+				<td><button type="submit">Envio</button></td>
+
+				<td><a class="btn btn-green" onClick="document.getElementById('show-modal').click();">Nuevo</a></td>
 			</tr>
 
 		</table>

@@ -37,7 +37,7 @@ class sintoma{
 			$fila = mysqli_fetch_assoc($rs);
 			$this->id = $fila['id'];
 			$this->sintoma = $fila['sintoma'];
-			$this->sintoma = $fila['descripcion'];
+			$this->descripcion = $fila['descripcion'];
 	
 		}
 	}

@@ -33,18 +33,9 @@ class plantilla{
 		    <ul>
 		        <li id="inicio"><a href="./">Inicio</a></li>
 			    <li id=""><a href="gestionDeVisitas.php">Gestión de Visitas</a></li>
+			    <li id=""><a href="matenimientos.php">Mantenimientos</a></li>
 			    <li id=""><a href="reportes.php">Reportes</a></li>
-			    <li id=""><a href="mantenimientoPacientes.php">Mant. Pacientes</a></li>
-			    <li id=""><a href="diagnostico.php">Mant. Diagnostico</a></li>
-			    <li id=""><a href="prueba_laboratorio.php">Prueba de Lab.</a></li>
-			    <li id=""><a href="resultados_analisis_indicados.php">Resultado Analisis</a></li>
-			    <li id=""><a href="tratamiento.php">Tratamiento</a></li>
 			    <li id=""><a href="Citas.php">Citas</a></li>
-			    <li id=""><a href="medicamentos.php">Medicamentos</a></li>
-			    <li id=""><a href="sintoma.php">Mant. Sintomas</a></li>
-			    <li id=""><a href="tipoPrueba.php">Tipo Prueba</a></li>
-
-			  
 			  
 		    </ul>
 		</nav>

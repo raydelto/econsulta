@@ -1,5 +1,6 @@
 <?php
 	include 'plantilla.php';
+	include 'submenu.php';
 	
 	$prueba_laboratorio = new prueba_laboratorio();
 	if($_POST){

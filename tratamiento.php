@@ -1,5 +1,6 @@
 <?php
 	include 'plantilla.php';
+	include 'submenu.php';
 
 	$tratamiento = new tratamiento();
 	if($_POST){
@@ -47,7 +48,7 @@
 	<table class="table-bordered unit-centered table-hovered">
 			
 				<?php 
-					 $tratamiento = tratamiento::listadoTratamiento();
+					 $tratamiento = tratamiento::listadoTratamientosAgregados();
 					if(mysqli_num_rows($tratamiento) < 1){
 						echo "<center><h4>Aún no se han agregado tratamiento<h4></center>";
 					}else{

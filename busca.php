@@ -26,8 +26,15 @@
 
 <input type="text" onkeyup="getStates(this.value)"/>
 <br/>
-<div id="results">
+<!-- <div id="results">
 	
-</div>
+</div> -->
+
+<!-- <table id="results">
+	<tr>
+		<td></td>
+	</tr>
+</table> -->
+
 </body>
 </html>

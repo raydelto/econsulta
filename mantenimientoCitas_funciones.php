@@ -149,6 +149,15 @@
 				}
 				
 			}
+
+			static function buscarNombre($id){
+				$sql = "SELECT `nombre`, CONCAT(`apellido_paterno`,' ',`apellido_materno`) as apellidos 
+						FROM paciente
+						WHERE `id` = {$id}";
+
+				$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+				return $rs;
+			}
 	
 	}
 ?>

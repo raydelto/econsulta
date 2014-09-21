@@ -73,8 +73,19 @@
 			mysqli_query(conexion::obtenerInstancia(), $sql);
 		}
 
-		static function listadoTratamiento(){
+		//tratamientos reales
+		static function listadoTratamientosAgregados(){
 			$sql = "SELECT `id`,`tratamiento` FROM tratamiento";
+			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
+			return $rs;
+		}
+
+
+		//listado de medicamentos
+		static function listadoTratamiento(){
+			$sql = "SELECT `id`,`nombre_comercial`,`nombre_generico`,`descripcion`,`contraindicaciones`,`presentacion`,
+							`laboratorio` 
+					FROM medicamento";
 			$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 			return $rs;
 		}

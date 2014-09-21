@@ -1,5 +1,6 @@
 <?php
 	include 'plantilla.php';
+	include 'submenu.php';
 
 	
 	$tipoPrueba = new tipoPrueba();
