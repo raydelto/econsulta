@@ -2,8 +2,37 @@
 <?php
 include 'plantilla.php';
 
+
+$Paciente = new Paciente();
+
+	if(isset($_POST['modal_paciente'])){
+		$Paciente->id = $_POST['id'];
+		$Paciente->cedula = $_POST['cedula'];
+		$Paciente->nombre = $_POST['nombre'];
+		$Paciente->apellido_paterno = $_POST['apellido_paterno'];
+		$Paciente->apellido_materno = $_POST['apellido_materno'];
+		$Paciente->estado_civil = $_POST['estado_civil'];
+		$Paciente->fecha_nacimiento = $_POST['fecha_nacimiento'];
+		$Paciente->telefono = $_POST['telefono'];
+		$Paciente->sexo = $_POST['sexo'];
+		$Paciente->direccion = $_POST['direccion'];
+		$Paciente->observacion = $_POST['observacion'];
+		$Paciente->guardar();
+		echo "
+			<script>
+				$( document ).ready(function() {
+					return document.getElementById('show-modal').click();
+				});
+
+			</script>
+
+		";
+	}
+
+
+
 $gestionDeVisitas = new gestionDeVisitas();
-if($_POST){
+if(isset($_POST['submit'])){
 	$gestionDeVisitas->id_consulta = $_POST['id_consulta'];
 	$gestionDeVisitas->id_paciente = $_POST['id_paciente'];
 	$gestionDeVisitas->fecha = $_POST['fecha'];
@@ -56,15 +85,15 @@ if($_POST){
 
 
 	
-		<button class="btn center" id="show-modal"
+		<button class="btn" id="show-modal"
 			    data-tools="modal" data-width="1204" data-title="Registrar Paciente" data-content="modal_pacientes.php">
 			    Registrar Paciente
 		</button>
-	
-	
+	<br/>
+
 
 <fieldset>
-	<legend align="center">Mantenimiento de gestionDeVisitas</legend>
+	<legend align="center">Consulta</legend>
 	<form action="gestionDeVisitas.php" class="form1" method="post" autocomplete="off">
 		<table class="unit-centered">
 
@@ -114,19 +143,12 @@ if($_POST){
 			</tr>
 			
 			<tr>
-				<td class="right">Fuma</td>
-				<td><input type="checkbox" name="fuma"  value="1" <?php echo ($gestionDeVisitas->fuma == '1')? 'checked':''; ?>></td>
+				<td class="right">APNP <!--Antecedentes Personales No Patológicos--></td>
+				<td>Fuma: <input type="checkbox" name="fuma"  value="1" <?php echo ($gestionDeVisitas->fuma == '1')? 'checked':''; ?>> 
+					 Alcohol: <input type="checkbox" name="alcohol"  value="1" <?php echo ($gestionDeVisitas->alcohol == '1')? 'checked':''; ?>>
+					 Café: <input type="checkbox" name="cafe"  value="1" <?php echo ($gestionDeVisitas->cafe == '1')? 'checked':''; ?>>
+					</td>
 					
-			</tr>
-			
-			<tr>
-				<td class="right">Alcohol</td>
-				<td><input type="checkbox" name="alcohol"  value="1" <?php echo ($gestionDeVisitas->alcohol == '1')? 'checked':''; ?>></td>
-			</tr>
-			
-			<tr>
-				<td class="right">Cafe</td>
-				<td><input type="checkbox" name="cafe"  value="1" <?php echo ($gestionDeVisitas->cafe == '1')? 'checked':''; ?>></td>
 			</tr>
 
 			<tr>
@@ -135,7 +157,7 @@ if($_POST){
 			</tr>
 			
 			<tr>
-				<td class="right"><input class=" btn "type="submit" value="Enviar"></td>
+				<td class="right"><input class=" btn "type="submit" onclick="submit()" name="submit" value="Enviar"></td>
 				
 			</tr>
 

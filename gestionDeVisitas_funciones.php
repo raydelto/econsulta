@@ -102,7 +102,7 @@
 									'{$this->cafe}',
 									'{$this->observacion}'
 									)";
-				echo $sql;
+				
 				mysqli_query(conexion::obtenerInstancia(), $sql);
 				$this->id_consulta = mysqli_insert_id(conexion::obtenerInstancia());
 				
@@ -110,14 +110,6 @@
 			
 
 			}
-		}
-
-		static function ultimoId($sql){
-			$rsu = mysqli_query(conexion::obtenerInstancia(), $sql);
-			$fila = mysqli_fetch_assoc($rsu);
-			$ultimo = $fila['ultimo_id'];
-			return  $ultimo;
-				
 		}
 
 		function eliminar($id_consulta){
@@ -132,6 +124,13 @@
 			return $rs;
 		}
 		
+		static function ultimoId($sql){
+			$rsu = mysqli_query(conexion::obtenerInstancia(), $sql);
+			$fila = mysqli_fetch_assoc($rsu);
+			$ultimo = $fila['ultimo_id'];
+			return  $ultimo;
+				
+		}
 	
 	}
 

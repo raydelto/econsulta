@@ -17,6 +17,7 @@
 	include 'receta_detalles_funciones.php';
 	include 'tipos_pruebas_detalles_funciones.php';
 	include 'reporte_consultas_funciones.php';
+	include 'tratamiento_detalles_funciones.php';
 
 	
 	include 'buscadorEnVivo.php';

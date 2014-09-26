@@ -23,24 +23,10 @@
 			}
 		}
 		
-		function __construct($id = 0){
-			$this->id = $this->id;
-			
-		}
-		
+	
 
 			function guardar(){
-				if($this->id > 0){
-					$sql="UPDATE `sintoma_detalle`
-						  SET			
-							`id_sintoma` = '{$this->id_sintoma}',
-							`id_consulta` = '{$this->id_consulta}'
-							 WHERE `id` =  '{$this->id}'";
-		
-					mysqli_query(conexion::obtenerInstancia(), $sql);
-					$this->id = mysqli_insert_id(conexion::obtenerInstancia());
-					
-				}else{
+			
 					$sql = "INSERT INTO `sintoma_detalle`
 										(
 										`id_sintoma`,
@@ -55,9 +41,5 @@
 					mysqli_query(conexion::obtenerInstancia(), $sql);
 					$this->id = mysqli_insert_id(conexion::obtenerInstancia());
 				}
-			}
-		
-		
-		
 		}
 ?>

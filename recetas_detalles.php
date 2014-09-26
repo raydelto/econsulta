@@ -3,7 +3,20 @@
 include 'plantilla.php';
 
 $consulta_id = $_GET['id'];
+/*
 
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+ 	CAMBIA EL NOMBDE DEL DOCUMENTO QUES TRATAMIENTO NO RECETAS
+
+
+
+*/
 $tratamiento = '';
 $receta_detalles_funciones = new receta_detalles_funciones();
 if(isset($_GET['tratamiento'])){
@@ -21,7 +34,8 @@ if(isset($_GET['tratamiento'])){
 	}
 
 if($tratamiento != null){
-	header("Location:tipos_pruebas_detalles.php?id={$consulta_id}");
+
+	header("Location:tratamiento_detalles.php?id={$consulta_id}");
 }
 
 }
@@ -29,8 +43,8 @@ if($tratamiento != null){
 ?>
 
 <fieldset>
-	<legend align="center">Seleccion de tratamiento</legend>
-	<form action="tipos_pruebas_detalles.php" method="get" autocomplete="off">
+	<legend align="center">Selección de medicamentos</legend>
+	<form action="recetas_detalles.php" method="get" autocomplete="off">
 		<table class="unit-centered">
 			
 			<tr>
@@ -57,9 +71,9 @@ if($tratamiento != null){
 	<table class="table-bordered unit-centered table-hovered">
 			
 				<?php 
-					 $tratamiento = tratamiento::listadoTratamiento();
+					 $tratamien = tratamiento::listadoTratamiento();
 					
-					if(mysqli_num_rows($tratamiento) < 1){
+					if(mysqli_num_rows($tratamien) < 1){
 						echo "<center><h4>Aún no se han agregado tratamiento<h4></center>";
 					}else{
 						echo "<thead>
@@ -74,7 +88,7 @@ if($tratamiento != null){
 										<th>laboratorio</th>
 									 </tr>
 							 </thead>";
-					while ($fila = mysqli_fetch_assoc($tratamiento)) {
+					while ($fila = mysqli_fetch_assoc($tratamien)) {
 						echo <<<CODIGO
 
 						<tr>

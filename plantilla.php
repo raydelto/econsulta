@@ -21,9 +21,9 @@ class plantilla{
 	<script type="text/javascript" src="js/funciones.js"></script> 
 	<script type="text/javascript" src="js/prefixfree.js"></script> 
 	<script type="text/javascript"  src="js/prefixfree.vars.js"></script> 
-	<script type="text/javascript"  src="js/jquery.min.js"></script> 
+	<script type="text/javascript"  src="js/jquery.js"></script> 
 	<script type="text/javascript"  src="js/kube.js"></script> 
-
+	<script type="text/javascript"  src="js/modernizr.js"></script> 
 
 </head>
 <body>

@@ -22,7 +22,7 @@ if(isset($_GET['tipo_prueba'])){
 
 }
 if($tipo_prueba != null){
-	header("Location:consulta_terminada.php");
+	header("Location:recetas_detalles.php?id={$consulta_id}");
 }
 
 
@@ -31,7 +31,7 @@ if($tipo_prueba != null){
 
 <fieldset>
 	<legend align="center">Mantenimiento de Tipo prueba</legend>
-	<form action="consulta_terminada.php" method="get" autocomplete="off">
+	<form action="tipos_pruebas_detalles.php" method="get" autocomplete="off">
 		<table class="unit-centered">
 			<tr>
 				<!--<td>ID</td>-->

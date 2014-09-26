@@ -88,7 +88,7 @@
 						echo "<h3 style='color: red' align='center'>Error, ésta Cédula está actualmente en uso.</h3>";
 					}else{
 						$this->id = mysqli_insert_id(conexion::obtenerInstancia());
-						header("Location:mantenimientoPacientes.php");
+						//header("Location:mantenimientoPacientes.php");
 					}
 				}else{
 					$sql = "INSERT INTO `paciente`
@@ -124,7 +124,7 @@
 						echo "<h3 style='color: red' align='center'>Error, ésta Cédula está actualmente en uso.</h3>";
 					}else{
 						$this->id = mysqli_insert_id(conexion::obtenerInstancia());
-						header("Location:mantenimientoPacientes.php");
+						//header("Location:mantenimientoPacientes.php");
 					}
 					
 				}

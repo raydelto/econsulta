@@ -89,7 +89,7 @@
 				FROM tipo_prueba t
 				JOIN prueba_laboratorio p
 				ON t.id = p.id_tipo_prueba";
-
+		echo $sql;
 		$rs = mysqli_query(conexion::obtenerInstancia(),$sql);
 		return $rs;
 	}

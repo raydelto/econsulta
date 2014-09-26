@@ -3,7 +3,8 @@
 
 	$eliminar ="";
 	$Paciente = new Paciente();
-	if($_POST){
+
+	if(isset($_POST['modal_paciente'])){
 		$Paciente->id = $_POST['id'];
 		$Paciente->cedula = $_POST['cedula'];
 		$Paciente->nombre = $_POST['nombre'];
@@ -17,6 +18,9 @@
 		$Paciente->observacion = $_POST['observacion'];
 		$Paciente->guardar();
 		//header("Location:mantenimientoPacientes.php");
+		
+
+
 	}else if(isset($_GET['edit'])){
 		$Paciente->id = $_GET['edit'];
 		$Paciente->cargar();
@@ -28,25 +32,55 @@
 		}
 	}
 ?>
+<script>
+$('form.ajax').on('submit',function(){
+	var id = "";
+	var that = $(this),
+		url = that.attr('action'),
+		type = that.attr('method'),
+		data = {};
 
-<script type="text/javascript">
-    function doSomething() {
+	that.find('[name]').each(function(index, value){
+		var that = $(this),
+			name = that.attr('name'),
+			value = that.val();
 
-      document.getElementById('show-modal').click();
+		data[name] = value;
 
-    }
 
-    /*$("#submitButton").trigger('click');*/
+	});
+
+	$.ajax({
+		url: url,
+		type: type,
+		data: data,
+		success: function(response){
+		/*	console.log(response);*/
+			that.prepend()[0].reset();
+		}
+	});
+
+	alert("Contacto agregado");
+	console.log(data['cedula']);
+	return false;
+});
+
+
+
+
+
+
 </script>
 
 
 <fieldset>
 	<legend align="center">Mantenimiento de Pacientes</legend>
-	<form action="gestionDeVisitas.php?fallo=" method="post" >
+	<form  action="gestionDeVisitas.php" class="ajax" method="post">
+		
 		<table class="unit-centered">
 			<tr>
-				<td class="right">ID</td>
-				<td><input type="text" name="id" value="<?php echo $Paciente->id ?>"></td>
+				<!-- <td class="right">ID</td> -->
+				<td><input type="hidden" name="id" value="<?php echo $Paciente->id ?>"></td>
 			</tr>
 
 			<tr>
@@ -123,8 +157,8 @@
 			</tr>
 
 			<tr>
-				<td><button type="submit">Envio</button></td>
-
+			
+				<td class="right"><input class=" btn "type="submit" name="modal_paciente"value="Enviar"></td>
 				<td><a class="btn btn-green" onClick="document.getElementById('show-modal').click();">Nuevo</a></td>
 			</tr>
 
@@ -133,7 +167,7 @@
 
 </fieldset>
 
-	<table class="table-bordered unit-centered table-hovered">
+	<!-- <table class="table-bordered unit-centered table-hovered">
 			
 				<?php 
 					$Paciente = Paciente::listadoPaciente();
@@ -170,13 +204,18 @@
 							<td>{$fila['direccion']}</td>
 							<td class="width-15">{$fila['observacion']}</td>
 							
-							<td><a href='mantenimientoPacientes.php?edit={$fila['id']}'>Editar</a> | 
-								<a onclick="return confirm('¿Seguro que desea borrar este Paciente?');" href='mantenimientoPacientes.php?del={$fila['id']}'>Eliminar</a></td>
+							
 						</tr>	
+
 CODIGO;
 						}
 					}
 				
 				?>
 		
-		</table>
+		</table> -->
+
+
+<!-- 
+		<td><a href='mantenimientoPacientes.php?edit={$fila['id']}'>Editar</a> | 
+								<a onclick="return confirm('¿Seguro que desea borrar este Paciente?');" href='mantenimientoPacientes.php?del={$fila['id']}'>Eliminar</a></td> -->

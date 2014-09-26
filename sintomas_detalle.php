@@ -15,23 +15,15 @@ if(isset($_GET['sintomas'])){
 	foreach ($sintoma as $key => $diag) {
 		$id_sintoma = $sintoma[$key];
 
-		$sintoma_detalle->id = 0; //por que será autoingrement
-		$sintoma_detalle->id_sintoma = $id_sintoma; //id de cada diagnostico
+		$sintoma_detalle->id = 0; 
+		$sintoma_detalle->id_sintoma = $id_sintoma;
 		$sintoma_detalle->id_consulta = $consulta_id;
 		$sintoma_detalle->guardar();
-
+		header("Location:diagnostico_detalles.php?id={$consulta_id}");
+		
 	}
 
 }
-
-
-
-if($sintoma != null){
-	
-	header("Location:diagnostico_detalles.php?id={$consulta_id}");
-	
-}
-
 
 
 
@@ -40,12 +32,9 @@ if($sintoma != null){
 </script>
 <fieldset>
 	<legend align="center">Selecciona los sintomas</legend>
-	<form action="sintomas_detalle.php" method="get" autocomplete="off">
+	<form action="sintomas_detalle.php?id=<?= $consulta_id ?>" method="get" autocomplete="off">
 		<table class="unit-centered">
-			<tr>
-				<!--<td>ID</td>-->
-				<input type="hidden" >
-			</tr>
+		
 			<tr>
 				<td >
 					<input type="hidden" value="<?php echo $consulta_id?>" name="id">

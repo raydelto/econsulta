@@ -41,7 +41,7 @@
 										'{$this->id_medicamento}',
 										'{$this->id_consulta}'
 										)";
-					
+				
 					mysqli_query(conexion::obtenerInstancia(), $sql);
 					$this->id = mysqli_insert_id(conexion::obtenerInstancia());
 				

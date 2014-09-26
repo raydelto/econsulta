@@ -26,7 +26,7 @@ if(isset($_GET['diagnosticos'])){
 
 
 if($diagno != null){
-	header("Location:recetas_detalles.php?id={$consulta_id}");
+	header("Location:tipos_pruebas_detalles.php?id={$consulta_id}");
 
 
 }
